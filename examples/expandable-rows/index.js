@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import MUIDataTable, {ExpandButton} from "../../src/";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 
 class Example extends React.Component {
 
@@ -105,7 +105,7 @@ class Example extends React.Component {
       onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) => console.log(curExpanded, allExpanded, rowsExpanded)
     };
 
-    const theme = createMuiTheme({
+    const theme = createTheme({
       overrides: {
         MUIDataTableSelectCell: {
           expandDisabled: {

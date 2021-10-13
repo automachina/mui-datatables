@@ -1,6 +1,6 @@
 import React from 'react';
 import MUIDataTable from '../../src/';
-import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
+import { createTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -28,7 +28,7 @@ class Example extends React.Component {
   }
 
   getMuiTheme = () =>
-    createMuiTheme({
+    createTheme({
       overrides: {
         MUIDataTable: {
           root: {
