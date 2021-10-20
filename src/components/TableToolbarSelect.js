@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { withStyles } from '@material-ui/core/styles';
-import MuiTooltip from '@material-ui/core/Tooltip';
+import Paper from '@mui/material/Paper';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
+import withStyles from '@mui/styles/withStyles';
+import MuiTooltip from '@mui/material/Tooltip';
 
-const defaultToolbarSelectStyles = theme => ({
+const defaultToolbarSelectStyles = (theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
     flex: '1 1 100%',
@@ -46,12 +46,12 @@ class TableToolbarSelect extends React.Component {
   /**
    * @param {number[]} selectedRows Array of rows indexes that are selected, e.g. [0, 2] will select first and third rows in table
    */
-  handleCustomSelectedRows = selectedRows => {
+  handleCustomSelectedRows = (selectedRows) => {
     if (!Array.isArray(selectedRows)) {
       throw new TypeError(`"selectedRows" must be an "array", but it's "${typeof selectedRows}"`);
     }
 
-    if (selectedRows.some(row => typeof row !== 'number')) {
+    if (selectedRows.some((row) => typeof row !== 'number')) {
       throw new TypeError(`Array "selectedRows" must contain only numbers`);
     }
 
@@ -78,7 +78,11 @@ class TableToolbarSelect extends React.Component {
           options.customToolbarSelect(selectedRows, displayData, this.handleCustomSelectedRows)
         ) : (
           <Tooltip title={textLabels.delete}>
-            <IconButton className={classes.iconButton} onClick={onRowsDelete} aria-label={textLabels.deleteAria}>
+            <IconButton
+              className={classes.iconButton}
+              onClick={onRowsDelete}
+              aria-label={textLabels.deleteAria}
+              size="large">
               <DeleteIcon className={classes.deleteIcon} />
             </IconButton>
           </Tooltip>

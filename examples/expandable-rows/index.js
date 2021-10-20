@@ -1,9 +1,9 @@
  import React from "react";
 import ReactDOM from "react-dom";
 import MUIDataTable, {ExpandButton} from "../../src/";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import { ThemeProvider, StyledEngineProvider, createTheme, adaptV4Theme } from "@mui/material/styles";
 
 class Example extends React.Component {
 
@@ -105,7 +105,7 @@ class Example extends React.Component {
       onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) => console.log(curExpanded, allExpanded, rowsExpanded)
     };
 
-    const theme = createTheme({
+    const theme = createTheme(adaptV4Theme({
       overrides: {
         MUIDataTableSelectCell: {
           expandDisabled: {
@@ -114,7 +114,7 @@ class Example extends React.Component {
           },
         },
       },
-    });
+    }));
 
     const components = {
       ExpandButton: function(props) {
@@ -124,9 +124,11 @@ class Example extends React.Component {
     };
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <MUIDataTable title={"ACME Employee list"} data={data} columns={columns} options={options} components={components} />
-      </MuiThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <MUIDataTable title={"ACME Employee list"} data={data} columns={columns} options={options} components={components} />
+        </ThemeProvider>
+      </StyledEngineProvider>
     );
 
   }

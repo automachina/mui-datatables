@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import React from 'react';
 import TableFilterListItem from './TableFilterListItem';
@@ -37,7 +37,7 @@ const TableFilterList = ({
       removedFilter = filterList[index];
     }
 
-    filterUpdate(index, filterValue, columnName, filterType, customFilterListUpdate, filterList => {
+    filterUpdate(index, filterValue, columnName, filterType, customFilterListUpdate, (filterList) => {
       if (options.onFilterChipClose) {
         options.onFilterChipClose(index, removedFilter, filterList);
       }
@@ -94,7 +94,7 @@ const TableFilterList = ({
     />
   );
 
-  const getFilterList = filterList => {
+  const getFilterList = (filterList) => {
     return filterList.map((item, index) => {
       if (columnNames[index].filterType === 'custom' && filterList[index].length) {
         const filterListRenderersValue = filterListRenderers[index](item);

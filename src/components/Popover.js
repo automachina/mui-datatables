@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import MuiPopover from '@material-ui/core/Popover';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import MuiPopover from '@mui/material/Popover';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Popover = ({ className, trigger, refExit, hide, content, ...providedProps }) => {
   const [isOpen, open] = useState(false);
@@ -17,7 +17,7 @@ const Popover = ({ className, trigger, refExit, hide, content, ...providedProps 
     }
   }, [hide, isOpen, open]);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     anchorEl.current = event.currentTarget;
     open(true);
   };
@@ -47,7 +47,7 @@ const Popover = ({ className, trigger, refExit, hide, content, ...providedProps 
 
   const triggerProps = {
     key: 'content',
-    onClick: event => {
+    onClick: (event) => {
       if (trigger.props.onClick) trigger.props.onClick();
       handleClick(event);
     },
@@ -68,7 +68,8 @@ const Popover = ({ className, trigger, refExit, hide, content, ...providedProps 
           aria-label="Close"
           onClick={handleRequestClose}
           className={closeIconClass}
-          style={{ position: 'absolute', right: '4px', top: '4px', zIndex: '1000' }}>
+          style={{ position: 'absolute', right: '4px', top: '4px', zIndex: '1000' }}
+          size="large">
           <CloseIcon />
         </IconButton>
         {content}

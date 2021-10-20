@@ -1,22 +1,25 @@
 import React from 'react';
 import MUIDataTable from '../../src/';
-import { createTheme, MuiThemeProvider, withStyles } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
+import withStyles from '@mui/styles/withStyles';
+import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import clsx from 'clsx';
 
-const customStyles = theme => ({
-  BusinessAnalystRow: {
-    '& td': { backgroundColor: '#FAA' },
-  },
-  GreyLine: {
-    '& td': { backgroundColor: theme.palette.grey[200] },
-  },
-  NameCell: {
-    fontWeight: 900,
-  },
-});
+const customStyles = theme => { 
+  return ({
+    BusinessAnalystRow: {
+      '& td': { backgroundColor: '#FAA' },
+    },
+    GreyLine: {
+      '& td': { backgroundColor: theme.palette.grey[200] },
+    },
+    NameCell: {
+      fontWeight: 900,
+    },
+  });
+};
 
 class Example extends React.Component {
   constructor(props) {
@@ -28,7 +31,7 @@ class Example extends React.Component {
   }
 
   getMuiTheme = () =>
-    createTheme({
+    createTheme(adaptV4Theme({
       overrides: {
         MUIDataTable: {
           root: {
@@ -61,7 +64,7 @@ class Example extends React.Component {
           },
         },
       },
-    });
+    }));
 
   toggleDenseTable = event => {
     this.setState({
@@ -189,30 +192,32 @@ class Example extends React.Component {
         };
       },
     };
-
+    const theme = this.getMuiTheme();
     return (
-      <MuiThemeProvider theme={this.getMuiTheme()}>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.state.denseTable}
-                onChange={this.toggleDenseTable}
-                value="denseTable"
-                color="primary"
-              />
-            }
-            label="Dense Table"
-          />
-          <FormControlLabel
-            control={
-              <Switch checked={this.state.vertical} onChange={this.toggleResponsive} value="vertical" color="primary" />
-            }
-            label="Responsive Vertical Table"
-          />
-        </FormGroup>
-        <MUIDataTable title={'ACME Employee list'} data={data} columns={columns} options={options} />
-      </MuiThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.state.denseTable}
+                  onChange={this.toggleDenseTable}
+                  value="denseTable"
+                  color="primary"
+                />
+              }
+              label="Dense Table"
+            />
+            <FormControlLabel
+              control={
+                <Switch checked={this.state.vertical} onChange={this.toggleResponsive} value="vertical" color="primary" />
+              }
+              label="Responsive Vertical Table"
+            />
+          </FormGroup>
+          <MUIDataTable title={'ACME Employee list'} data={data} columns={columns} options={options} />
+        </ThemeProvider>
+      </StyledEngineProvider>
     );
   }
 }

@@ -2,16 +2,10 @@ import React, { Fragment, Component } from "react";
 import { Waypoint } from "react-waypoint";
 import PropTypes from "prop-types";
 import MUIDataTable from "../../src/";
-import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import {
-  withStyles,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Paper
-} from "@material-ui/core";
+import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
+import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from "@mui/material";
+
+import withStyles from '@mui/styles/withStyles';
 
 const styles = theme => ({
   root: {
@@ -148,7 +142,7 @@ class MessageManager extends Component {
   }
 
   getMuiTheme = () =>
-    createTheme({
+    createTheme(adaptV4Theme({
       typography: {
         useNextVariants: true
       },
@@ -165,7 +159,7 @@ class MessageManager extends Component {
         },
         MUIDataTableBodyCell: {}
       }
-    });
+    }));
 
   // eslint-disable-next-line max-lines-per-function
   render() {

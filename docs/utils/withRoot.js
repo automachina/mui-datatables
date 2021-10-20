@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import getPageContext from './getPageContext';
 
 function withRoot(Component) {
@@ -21,10 +21,13 @@ function withRoot(Component) {
 
     render() {
       // MuiThemeProvider makes the theme available down the React tree thanks to React context.
+      const { theme } = this.pageContext;
       return (
-        <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
-          <Component {...this.props} />
-        </MuiThemeProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme} sheetsManager={this.pageContext.sheetsManager}>
+            <Component {...this.props} />
+          </ThemeProvider>
+        </StyledEngineProvider>
       );
     }
   }
@@ -33,7 +36,7 @@ function withRoot(Component) {
     pageContext: PropTypes.object,
   };
 
-  WithRoot.getInitialProps = ctx => {
+  WithRoot.getInitialProps = (ctx) => {
     if (Component.getInitialProps) {
       return Component.getInitialProps(ctx);
     }

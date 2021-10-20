@@ -1,18 +1,20 @@
 /* eslint-disable no-underscore-dangle */
 
 import { SheetsRegistry } from 'jss';
-import { createTheme, createGenerateClassName } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import createGenerateClassName from '@mui/styles/createGenerateClassName';
+import { purple, green } from '@mui/material/colors';
 
 // A theme with custom primary and secondary color.
 // It's optional.
-const theme = createTheme({
-  palette: {
-    primary: purple,
-    secondary: green,
-  },
-});
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: purple,
+      secondary: green,
+    },
+  }),
+);
 
 function createPageContext() {
   return {

@@ -2,11 +2,11 @@ import React from 'react';
 import { spy } from 'sinon';
 import { mount, shallow } from 'enzyme';
 import { assert } from 'chai';
-import MuiTablePagination from '@material-ui/core/TablePagination';
+import MuiTablePagination from '@mui/material/TablePagination';
 import getTextLabels from '../src/textLabels';
 import TablePagination from '../src/components/TablePagination';
 
-describe('<TablePagination />', function() {
+describe('<TablePagination />', function () {
   let options;
 
   before(() => {
@@ -29,10 +29,7 @@ describe('<TablePagination />', function() {
       <TablePagination options={options} count={100} page={1} rowsPerPage={10} changePage={changePage} />,
     );
 
-    wrapper
-      .find('#pagination-next')
-      .at(0)
-      .simulate('click');
+    wrapper.find('#pagination-next').at(0).simulate('click');
     wrapper.unmount();
 
     assert.strictEqual(changePage.callCount, 1);

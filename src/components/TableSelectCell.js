@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import Checkbox from '@material-ui/core/Checkbox';
-import TableCell from '@material-ui/core/TableCell';
-import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@mui/material/Checkbox';
+import TableCell from '@mui/material/TableCell';
+import makeStyles from '@mui/styles/makeStyles';
 import ExpandButton from './ExpandButton';
 
 const useStyles = makeStyles(
-  theme => ({
+  (theme) => ({
     root: {
       '@media print': {
         display: 'none',
@@ -97,7 +97,7 @@ const TableSelectCell = ({
 
   let refProp = {};
   if (setHeadCellRef) {
-    refProp.ref = el => {
+    refProp.ref = (el) => {
       setHeadCellRef(0, 0, el);
     };
   }

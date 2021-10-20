@@ -1,23 +1,23 @@
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import Grid from '@mui/material/Grid';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@mui/styles/withStyles';
 import cloneDeep from 'lodash.clonedeep';
 
-export const defaultFilterStyles = theme => ({
+export const defaultFilterStyles = (theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
     padding: '24px 24px 36px 24px',
@@ -162,7 +162,7 @@ class TableFilter extends React.Component {
     const { classes, filterData } = this.props;
     const { filterList } = this.state;
     const renderItem =
-      column.filterOptions && column.filterOptions.renderValue ? column.filterOptions.renderValue : v => v;
+      column.filterOptions && column.filterOptions.renderValue ? column.filterOptions.renderValue : (v) => v;
 
     return (
       <Grid item key={index} xs={6}>
@@ -212,7 +212,7 @@ class TableFilter extends React.Component {
     const renderItem =
       column.filterOptions && column.filterOptions.renderValue
         ? column.filterOptions.renderValue
-        : v => (v != null ? v.toString() : '');
+        : (v) => (v != null ? v.toString() : '');
     const width = (column.filterOptions && column.filterOptions.fullWidth) === true ? 12 : 6;
 
     return (
@@ -227,7 +227,7 @@ class TableFilter extends React.Component {
             fullWidth
             value={filterList[index].length ? filterList[index].toString() : textLabels.all}
             name={column.name}
-            onChange={event => this.handleDropdownChange(event, index, column.name)}
+            onChange={(event) => this.handleDropdownChange(event, index, column.name)}
             input={<Input name={column.name} id={column.name} />}>
             <MenuItem value={textLabels.all} key={0}>
               {textLabels.all}
@@ -263,7 +263,7 @@ class TableFilter extends React.Component {
             label={column.label}
             value={filterList[index].toString() || ''}
             data-testid={'filtertextfield-' + column.name}
-            onChange={event => this.handleTextFieldChange(event, index, column.name)}
+            onChange={(event) => this.handleTextFieldChange(event, index, column.name)}
           />
         </FormControl>
       </Grid>
@@ -276,7 +276,7 @@ class TableFilter extends React.Component {
     const { classes, filterData } = this.props;
     const { filterList } = this.state;
     const renderItem =
-      column.filterOptions && column.filterOptions.renderValue ? column.filterOptions.renderValue : v => v;
+      column.filterOptions && column.filterOptions.renderValue ? column.filterOptions.renderValue : (v) => v;
     const width = (column.filterOptions && column.filterOptions.fullWidth) === true ? 12 : 6;
     return (
       <Grid
@@ -290,9 +290,9 @@ class TableFilter extends React.Component {
             multiple
             fullWidth
             value={filterList[index] || []}
-            renderValue={selected => selected.map(renderItem).join(', ')}
+            renderValue={(selected) => selected.map(renderItem).join(', ')}
             name={column.name}
-            onChange={event => this.handleMultiselectChange(index, event.target.value, column.name)}
+            onChange={(event) => this.handleMultiselectChange(index, event.target.value, column.name)}
             input={<Input name={column.name} id={column.name} />}>
             {filterData[index].map((filterValue, filterIndex) => (
               <MenuItem value={filterValue} key={filterIndex + 1}>
@@ -395,7 +395,7 @@ class TableFilter extends React.Component {
           </div>
           <div className={classes.filtersSelected} />
         </div>
-        <Grid container direction="row" justify="flex-start" alignItems="center" spacing={4}>
+        <Grid container direction="row" justifyContent="flex-start" alignItems="center" spacing={4}>
           {columns.map((column, index) => {
             if (column.filter) {
               const filterType = column.filterType || options.filterType;

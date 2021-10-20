@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@mui/styles/withStyles';
 
 const defaultResizeStyles = {
   root: {
@@ -135,14 +135,14 @@ class TableResize extends React.Component {
   onResizeMove = (id, e) => {
     const { isResize, resizeCoords, lastColumn } = this.state;
 
-    const prevCol = id => {
+    const prevCol = (id) => {
       let nextId = id - 1;
       while (typeof resizeCoords[nextId] === 'undefined' && nextId >= 0) {
         nextId--;
       }
       return nextId;
     };
-    const nextCol = id => {
+    const nextCol = (id) => {
       let nextId = id + 1;
       let tries = 0;
       while (typeof resizeCoords[nextId] === 'undefined' && tries < 20) {
@@ -162,7 +162,7 @@ class TableResize extends React.Component {
 
     let parentOffsetLeft = getParentOffsetLeft(tableEl);
 
-    const nextCoord = id => {
+    const nextCoord = (id) => {
       let nextId = id + 1;
       let tries = 0;
       while (typeof resizeCoords[nextId] === 'undefined' && tries < 20) {
@@ -171,7 +171,7 @@ class TableResize extends React.Component {
       }
       return resizeCoords[nextId];
     };
-    const prevCoord = id => {
+    const prevCoord = (id) => {
       let nextId = id - 1;
       while (typeof resizeCoords[nextId] === 'undefined' && nextId >= 0) {
         nextId--;

@@ -1,23 +1,23 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+import Typography from '@mui/material/Typography';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
 import Popover from './Popover';
 import TableFilter from './TableFilter';
 import TableViewCol from './TableViewCol';
 import TableSearch from './TableSearch';
-import SearchIcon from '@material-ui/icons/Search';
-import DownloadIcon from '@material-ui/icons/CloudDownload';
-import PrintIcon from '@material-ui/icons/Print';
-import ViewColumnIcon from '@material-ui/icons/ViewColumn';
-import FilterIcon from '@material-ui/icons/FilterList';
+import SearchIcon from '@mui/icons-material/Search';
+import DownloadIcon from '@mui/icons-material/CloudDownload';
+import PrintIcon from '@mui/icons-material/Print';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
+import FilterIcon from '@mui/icons-material/FilterList';
 import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 import find from 'lodash.find';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@mui/styles/withStyles';
 import { createCSVDownload, downloadCSV } from '../utils';
-import MuiTooltip from '@material-ui/core/Tooltip';
+import MuiTooltip from '@mui/material/Tooltip';
 
-export const defaultToolbarStyles = theme => ({
+export const defaultToolbarStyles = (theme) => ({
   root: {
     '@media print': {
       display: 'none',
@@ -65,7 +65,7 @@ export const defaultToolbarStyles = theme => ({
     marginTop: '10px',
     marginRight: '8px',
   },
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down('md')]: {
     titleRoot: {},
     titleText: {
       fontSize: '16px',
@@ -82,7 +82,7 @@ export const defaultToolbarStyles = theme => ({
       textAlign: 'right',
     },
   },
-  [theme.breakpoints.down('xs')]: {
+  [theme.breakpoints.down('sm')]: {
     root: {
       display: 'block',
       '@media print': {
@@ -132,15 +132,15 @@ class TableToolbar extends React.Component {
       columnOrderCopy = columns.map((item, idx) => idx);
     }
 
-    data.forEach(row => {
+    data.forEach((row) => {
       let newRow = { index: row.index, data: [] };
-      columnOrderCopy.forEach(idx => {
+      columnOrderCopy.forEach((idx) => {
         newRow.data.push(row.data[idx]);
       });
       dataToDownload.push(newRow);
     });
 
-    columnOrderCopy.forEach(idx => {
+    columnOrderCopy.forEach((idx) => {
       columnsToDownload.push(columns[idx]);
     });
 
@@ -154,7 +154,7 @@ class TableToolbar extends React.Component {
           row.index = index;
 
           return {
-            data: row.data.map(column => {
+            data: row.data.map((column) => {
               i += 1;
 
               // if we have a custom render, which will appear as a react element, we must grab the actual value from data
@@ -162,18 +162,18 @@ class TableToolbar extends React.Component {
               // TODO: Create a utility function for checking whether or not something is a react object
               let val =
                 typeof column === 'object' && column !== null && !Array.isArray(column)
-                  ? find(data, d => d.index === row.dataIndex).data[i]
+                  ? find(data, (d) => d.index === row.dataIndex).data[i]
                   : column;
-              val = typeof val === 'function' ? find(data, d => d.index === row.dataIndex).data[i] : val;
+              val = typeof val === 'function' ? find(data, (d) => d.index === row.dataIndex).data[i] : val;
               return val;
             }),
           };
         });
 
         dataToDownload = [];
-        filteredDataToDownload.forEach(row => {
+        filteredDataToDownload.forEach((row) => {
           let newRow = { index: row.index, data: [] };
-          columnOrderCopy.forEach(idx => {
+          columnOrderCopy.forEach((idx) => {
             newRow.data.push(row.data[idx]);
           });
           dataToDownload.push(newRow);
@@ -182,9 +182,9 @@ class TableToolbar extends React.Component {
 
       // now, check columns:
       if (options.downloadOptions.filterOptions.useDisplayedColumnsOnly) {
-        columnsToDownload = columnsToDownload.filter(_ => _.display === 'true');
+        columnsToDownload = columnsToDownload.filter((_) => _.display === 'true');
 
-        dataToDownload = dataToDownload.map(row => {
+        dataToDownload = dataToDownload.map((row) => {
           row.data = row.data.filter((_, index) => columns[columnOrderCopy[index]].display === 'true');
           return row;
         });
@@ -193,9 +193,9 @@ class TableToolbar extends React.Component {
     createCSVDownload(columnsToDownload, dataToDownload, options, downloadCSV);
   };
 
-  setActiveIcon = iconName => {
+  setActiveIcon = (iconName) => {
     this.setState(
-      prevState => ({
+      (prevState) => ({
         showSearch: this.isSearchShown(iconName),
         iconActive: iconName,
         prevIconActive: prevState.iconActive,
@@ -219,7 +219,7 @@ class TableToolbar extends React.Component {
     );
   };
 
-  isSearchShown = iconName => {
+  isSearchShown = (iconName) => {
     let nextVal = false;
     if (this.state.showSearch) {
       if (this.state.searchText) {
@@ -265,7 +265,7 @@ class TableToolbar extends React.Component {
     }));
   };
 
-  handleSearch = value => {
+  handleSearch = (value) => {
     this.setState({ searchText: value });
     this.props.searchTextUpdate(value);
   };
@@ -354,10 +354,11 @@ class TableToolbar extends React.Component {
               <IconButton
                 aria-label={search}
                 data-testid={search + '-iconButton'}
-                ref={el => (this.searchButton = el)}
+                ref={(el) => (this.searchButton = el)}
                 classes={{ root: this.getActiveIcon(classes, 'search') }}
                 disabled={options.search === 'disabled'}
-                onClick={this.handleSearchIconClick}>
+                onClick={this.handleSearchIconClick}
+                size="large">
                 <SearchIconComponent />
               </IconButton>
             </Tooltip>
@@ -369,7 +370,8 @@ class TableToolbar extends React.Component {
                 aria-label={downloadCsv}
                 classes={{ root: classes.icon }}
                 disabled={options.download === 'disabled'}
-                onClick={this.handleCSVDownload}>
+                onClick={this.handleCSVDownload}
+                size="large">
                 <DownloadIconComponent />
               </IconButton>
             </Tooltip>
@@ -386,7 +388,8 @@ class TableToolbar extends React.Component {
                           aria-label={print}
                           disabled={options.print === 'disabled'}
                           onClick={handlePrint}
-                          classes={{ root: classes.icon }}>
+                          classes={{ root: classes.icon }}
+                          size="large">
                           <PrintIconComponent />
                         </IconButton>
                       </Tooltip>
@@ -408,7 +411,8 @@ class TableToolbar extends React.Component {
                     aria-label={viewColumns}
                     classes={{ root: this.getActiveIcon(classes, 'viewcolumns') }}
                     disabled={options.viewColumns === 'disabled'}
-                    onClick={this.setActiveIcon.bind(null, 'viewcolumns')}>
+                    onClick={this.setActiveIcon.bind(null, 'viewcolumns')}
+                    size="large">
                     <ViewColumnIconComponent />
                   </IconButton>
                 </Tooltip>
@@ -437,7 +441,8 @@ class TableToolbar extends React.Component {
                     aria-label={filterTable}
                     classes={{ root: this.getActiveIcon(classes, 'filter') }}
                     disabled={options.filter === 'disabled'}
-                    onClick={this.setActiveIcon.bind(null, 'filter')}>
+                    onClick={this.setActiveIcon.bind(null, 'filter')}
+                    size="large">
                     <FilterIconComponent />
                   </IconButton>
                 </Tooltip>

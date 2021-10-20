@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import withStyles from '@mui/styles/withStyles';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
 
-const styles = theme => ({
+const styles = (theme) => ({
   list: {
     width: 250,
   },
@@ -26,7 +26,7 @@ const sandboxes = [
   { name: 'Resizable Columns', href: 'https://codesandbox.io/embed/q8w3230qpj?autoresize=1&hidenavigation=1' },
 ];
 
-const SandboxItem = props => (
+const SandboxItem = (props) => (
   <ListItem button>
     <ListItemText onClick={() => window.open(props.href, '_blank')} primary={props.name} />
   </ListItem>
@@ -50,7 +50,7 @@ class Menu extends React.Component {
                 Examples
               </ListSubheader>
             }>
-            {sandboxes.map(item => (
+            {sandboxes.map((item) => (
               <SandboxItem href={item.href} name={item.name} />
             ))}
           </List>

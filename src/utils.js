@@ -58,10 +58,10 @@ function sortCompare(order) {
 }
 
 function buildCSV(columns, data, options) {
-  const replaceDoubleQuoteInString = columnData =>
+  const replaceDoubleQuoteInString = (columnData) =>
     typeof columnData === 'string' ? columnData.replace(/\"/g, '""') : columnData;
 
-  const buildHead = columns => {
+  const buildHead = (columns) => {
     return (
       columns
         .reduce(
@@ -80,7 +80,7 @@ function buildCSV(columns, data, options) {
   };
   const CSVHead = buildHead(columns);
 
-  const buildBody = data => {
+  const buildBody = (data) => {
     if (!data.length) return '';
     return data
       .reduce(
@@ -89,7 +89,7 @@ function buildCSV(columns, data, options) {
           '"' +
           row.data
             .filter((_, index) => columns[index].download)
-            .map(columnData => escapeDangerousCSVCharacters(replaceDoubleQuoteInString(columnData)))
+            .map((columnData) => escapeDangerousCSVCharacters(replaceDoubleQuoteInString(columnData)))
             .join('"' + options.downloadOptions.separator + '"') +
           '"\r\n',
         '',

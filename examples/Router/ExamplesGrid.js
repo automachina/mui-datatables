@@ -1,9 +1,9 @@
 import {Link} from "react-router-dom";
-import {Card, CardContent, Grid, Typography} from "@material-ui/core";
+import {Card, CardContent, Grid, Typography} from "@mui/material";
 import React from "react";
 import examples from "../examples";
-import {withStyles} from "@material-ui/core/styles/index";
-import TextField from '@material-ui/core/TextField';
+import withStyles from '@mui/styles/withStyles';
+import TextField from '@mui/material/TextField';
 
 const styles = {
     container: {
@@ -64,7 +64,11 @@ class ExamplesGrid extends React.Component {
         <Typography variant="subtitle2" align="center">({examplesSortedKeys.length}) Examples</Typography>
 
         <Typography variant="subtitle2" align="center" style={{margin:'10px'}}>
-          <TextField placeholder="Search Examples" value={this.state.searchVal} onChange={(e) => this.setSearchVal(e.target.value)} />
+          <TextField 
+            placeholder="Search Examples"
+            variant="standard"
+            value={this.state.searchVal} 
+            onChange={(e) => this.setSearchVal(e.target.value)} />
         </Typography>
 
         <Grid container className={classes.container} spacing={1}>

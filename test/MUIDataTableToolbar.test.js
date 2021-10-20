@@ -1,10 +1,10 @@
-import IconButton from '@material-ui/core/IconButton';
-import DownloadIcon from '@material-ui/icons/CloudDownload';
-import FilterIcon from '@material-ui/icons/FilterList';
-import PrintIcon from '@material-ui/icons/Print';
-import SearchIcon from '@material-ui/icons/Search';
-import CloseIcon from '@material-ui/icons/Close';
-import ViewColumnIcon from '@material-ui/icons/ViewColumn';
+import IconButton from '@mui/material/IconButton';
+import DownloadIcon from '@mui/icons-material/CloudDownload';
+import FilterIcon from '@mui/icons-material/FilterList';
+import PrintIcon from '@mui/icons-material/Print';
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
+import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import { assert } from 'chai';
 import { mount, shallow } from 'enzyme';
 import React from 'react';
@@ -13,7 +13,7 @@ import TableSearch from '../src/components/TableSearch';
 import TableToolbar from '../src/components/TableToolbar';
 import getTextLabels from '../src/textLabels';
 
-describe('<TableToolbar />', function() {
+describe('<TableToolbar />', function () {
   let data;
   let columns;
   let options;
