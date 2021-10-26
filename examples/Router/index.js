@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import withStyles from '@mui/styles/withStyles';
+import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
+import { useTheme, withStyles } from '@mui/styles';
 import ExamplesGrid from './ExamplesGrid';
 import examples from '../examples';
 import Button from '@mui/material/Button';
@@ -59,9 +60,14 @@ class Examples extends React.Component {
 const StyledExamples = withRouter(withStyles(styles)(Examples));
 
 function App() {
+  const theme = useTheme() ?? createTheme();
   return (
     <Router hashType="noslash">
-      <StyledExamples />
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <StyledExamples />
+        </ThemeProvider>
+      </StyledEngineProvider>
     </Router>
   );
 }

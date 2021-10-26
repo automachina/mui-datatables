@@ -25,7 +25,6 @@ const CustomTooltip = (props) => {
   return (
     <MuiTooltip 
       title={props.title} 
-      interactive={true} 
       TransitionComponent={Fade}
       TransitionProps={{ timeout: 250 }}
       leaveDelay={250}>{props.children}</MuiTooltip>

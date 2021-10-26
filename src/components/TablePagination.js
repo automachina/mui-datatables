@@ -67,7 +67,8 @@ function TablePagination(props) {
               component="div"
               className={classes.root}
               classes={{
-                caption: classes.caption,
+                selectLabel: classes.selectLabel,
+                displayedRows: classes.displayedRows,
                 toolbar: classes.toolbar,
                 selectRoot: classes.selectRoot,
               }}
