@@ -9,6 +9,8 @@ function Example() {
   // const allTags = ['leave-message', 'frequently-busy', 'nice', 'grumpy', 'in-person', 'preferred', 'second-choice'];
   const [filterArrayFullMatch, setFilterArrayFullMatch] = useState(true);
 
+  const [tableRef, setTableRef] = useState(React.createRef());
+
   const columns = [
     {
       name: "Name",
@@ -114,7 +116,12 @@ function Example() {
         }
         label="Fullmatch for Array filter"
       />
-      <MUIDataTable title={"ACME Employee list"} data={data} columns={columns} options={options} />
+      <MUIDataTable 
+        ref={el => setTableRef(el)}
+        title={"ACME Employee list"} 
+        data={data} 
+        columns={columns} 
+        options={options} />
     </>
   );
 

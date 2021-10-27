@@ -2080,15 +2080,15 @@ class MUIDataTable extends React.Component {
 
 const MuiDataTableWithStyles = withStyles(defaultTableStyles, { name: 'MUIDataTable' })(MUIDataTable);
 
-const MuiDataTable = (props) => {
+const MuiDataTable = React.forwardRef((props, ref) => {
   const theme = useTheme() ?? createTheme();
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <MuiDataTableWithStyles {...props} />
+        <MuiDataTableWithStyles ref={ref} {...props} />
       </ThemeProvider>
     </StyledEngineProvider>
   );
-};
+});
 
 export default MuiDataTable;
